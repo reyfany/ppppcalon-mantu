@@ -1,0 +1,45 @@
+
+// testig view
+Route::view('/coba', 'penjual/image/index');
+// penjual
+Route::view('/homepenjual', 'penjual/dashboard');
+
+Route::view('/penjualan', 'penjual/penjualan/index');
+
+Route::view('/kategori', 'penjual/kategori/index');
+Route::view('/tambahkategori', 'penjual/kategori/tambah');
+Route::view('/ubahkategori', 'penjual/kategori/ubah');
+
+Route::view('/produk', 'penjual/produk/index');
+Route::view('/tambahproduk', 'penjual/produk/tambah');
+Route::view('/ubahproduk', 'penjual/produk/ubah');
+Route::view('/showproduk', 'penjual/produk/show');
+
+Route::view('/pemesanan', 'penjual/pemesanan/index');
+Route::view('/ubahpemesanan', 'penjual/pemesanan/ubah');
+
+Route::view('/profile', 'penjual/profile/profile');
+// end penjual
+
+// pembeli
+Route::view('/homepembeli', 'pembeli/dashboard');
+Route::view('/pemesananpembeli', 'pembeli/pemesanan/index');
+Route::view('/review', 'pembeli/review/index');
+// end pembeli
+
+// administrator
+Route::view('/homeadmin', 'admin/dashboard');
+Route::view('/users', 'admin/users/index');
+Route::view('/tambahusers', 'admin/users/tambah');
+Route::view('/ubahusers', 'admin/users/ubah');
+// end administrator
+
+// landing
+Route::view('/index', 'frontend/index');
+Route::view('/cart', 'frontend/pages/cart');
+Route::view('/checkout', 'frontend/pages/checkout');
+Route::view('/shop-grid', 'frontend/pages/shop-grid');
+Route::view('/shop-detail', 'frontend/pages/shop-single');
+Route::view('/loginya', 'frontend/pages/login');
+Route::view('/registernya', 'frontend/pages/register');
+Route::view('/produk-detail', 'frontend/pages/produk-detail');
