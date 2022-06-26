@@ -35,10 +35,6 @@ class Cart extends Model
         public function detail() {
             return $this->hasMany('App\CartDetail', 'cart_id');
         }
-
-        public function confirm() {
-            return $this->hasOne('App\confirm', 'image');
-        }
     
         public function updatetotal($itemcart, $subtotal) {
             $this->attributes['subtotal'] = $itemcart->subtotal + $subtotal;

@@ -96,10 +96,9 @@
                                             </td>
                                             @if($itemuser->role == 'penjual')
                                             <td>
-                                              {{-- {{ $order->cart->image }} --}}
-                                              @foreach($confirms as $confirm)
-                                              <a href="{{ url('assets/images/'. $confirm->image) }}">  <button class="icon-download btn bg-danger" download type="button"></button></a>
-                                              @endforeach 
+                                              @if ($order->confirm($order->id) == true)
+                                              <a href="{{ url('assets/images/'. $order->confirm($order->id)->image)}}">  <button class="icon-download btn bg-danger" download type="button"></button></a>
+                                              @endif
                                             </td>
                                             @endif
                                             <td class="justify-content-center d-flex">

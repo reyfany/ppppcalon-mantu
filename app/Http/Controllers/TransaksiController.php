@@ -20,12 +20,16 @@ class TransaksiController extends Controller
     public function index(Request $request)
     {
         $itemuser = $request->user();
-        $confirms = confirm::get(); 
+        $confirms = confirm::with('order');
+        // $confirms = confirm::whereHas('confirm', function($q) {
+        //     $q->where('status', 'sudah');
+        // })
+        //     ->paginate(5); 
+
         if ($itemuser->role == 'penjual') 
         {
             $itemorder = Order::whereHas('cart', function($q) {
                 $q->where('status_cart', 'checkout');
-                // $q->where('cart_id', 'image');
             })
             
                 ->orderBy('id')
@@ -43,6 +47,7 @@ class TransaksiController extends Controller
                         ->orderBy('id')
                         ->paginate(5);
         }
+        // dd($confirms);
         $data = array('title' => 'Data Transaksi',
                     'itemorder' => $itemorder,
                     'itemuser' => $itemuser,
@@ -208,6 +213,7 @@ class TransaksiController extends Controller
     {
         $itemuser = $request->user();
         $itemcart = Cart::where('user_id', $itemuser->id)->firstOrFail();
+        $itemorder = Order::where('cart_id', $itemcart->id)->first();
         $confirm = new confirm();
         $file = $request->file('image');
         $ext = $file->getClientOriginalExtension();
@@ -216,7 +222,9 @@ class TransaksiController extends Controller
 
         $confirm->cart_id       = $itemcart->id;
         $confirm->user_id       = $itemuser->id;
+        $confirm->order_id      = $itemorder->id;
         $confirm->image         = $newName;
+        $confirm->status        = 'sudah';
         // dd($confirm);
         $confirm->save();
 

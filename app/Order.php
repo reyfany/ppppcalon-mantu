@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 class Order extends Model
 {
     protected $table = 'orders';
+    protected $primaryKey= 'id';
     protected $fillable = [
         'cart_id',
         'nama_penerima',
@@ -36,8 +37,13 @@ class Order extends Model
         return $this->belongsTo('App\Cart', 'cart_id', 'id');
     }
 
-    public function confirm()
+    // public function confirm() {
+    //     return $this->belongsTo('App\confirm','image');
+    // }
+
+    public function confirm($id)
     {
-        return $this->hasOne(confirm::class);
+      $confirm = confirm::where('order_id', $id)->first();
+      return $confirm;
     }
 }

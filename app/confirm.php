@@ -21,12 +21,8 @@ class confirm extends Model
     public function user() {
         return $this->belongsTo('App\User','user_id');
     }
-   
-    public function order() {
-        return $this->hasOne('App\Order', 'cart_id', 'id');
-    }
 
-    public function Cart() {
-        return $this->hasOne('App\Cart', 'cart_id', 'id');
+    public function Order() {
+        return $this->hasMany('App\Order');
     }
 }

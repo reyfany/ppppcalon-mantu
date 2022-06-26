@@ -31,6 +31,12 @@ class UsersTableSeeder extends Seeder
                 'password'=>Hash::make('3333'),
                 'role'=>'pembeli',
             ),
+            array(
+                'name'=>'Pembeli2',
+                'email'=>'pembeli2@gmail.com',
+                'password'=>Hash::make('11111111'),
+                'role'=>'pembeli',
+            ),
         );
         DB::table('users')->insert($data);
 
