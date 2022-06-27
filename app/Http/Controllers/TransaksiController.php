@@ -204,19 +204,24 @@ class TransaksiController extends Controller
         return view('transaksi.konfirmasi', $data);
     }
 
-    public function storeconfirm(Request $request, $id)
+    public function storeconfirm(Request $request)
     {
         $itemuser = $request->user();
-        $itemorder = Order::where('cart_id', $id)->latest()->first();
+        $itemcart = Cart::where('user_id', $itemuser->id)->latest()->first();
+        // $itemorder = Order::where('cart_id', $id)->first();
+        $itemorder = Order::whereHas('cart', function($q) use ($itemuser) {
+            $q->where('status_cart', 'checkout');
+            $q->where('user_id', $itemuser->id);
+        });
         $confirm = new confirm();
         $file = $request->file('image');
         $ext = $file->getClientOriginalExtension();
         $newName = rand(100000,1001238912).".".$ext;
         $file->move('assets/images/', $newName);
 
-        // $confirm->cart_id       = $itemcart->id;
+        $confirm->cart_id       = $itemcart->id;
         $confirm->user_id       = $itemuser->id;
-        $confirm->order_id      = $itemorder->id;
+        $confirm->order_id      = $itemcart->id;
         $confirm->image         = $newName;
         $confirm->status        = 'sudah';
         // dd($confirm);

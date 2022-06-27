@@ -50,9 +50,8 @@
                               <h3 class="card-title">Form Pembayaran</h3>
                             </div>
                             <div class="card-body">
-                              <form action="{{ route('confirm.store', $itemuser->id ) }}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                @method('PATCH')
+                              <form action="{{ route('confirm.store' ) }}" method="post" enctype="multipart/form-data">
+                                @csrf()
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label>Email User</label>
