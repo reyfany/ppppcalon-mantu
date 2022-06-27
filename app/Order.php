@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\DB;
 class Order extends Model
 {
     protected $table = 'orders';
-    protected $primaryKey= 'id';
+    // protected $primaryKey= 'id';
     protected $fillable = [
+        'id',
         'cart_id',
         'nama_penerima',
         'no_tlp',
@@ -36,10 +37,6 @@ class Order extends Model
     public function cart() {
         return $this->belongsTo('App\Cart', 'cart_id', 'id');
     }
-
-    // public function confirm() {
-    //     return $this->belongsTo('App\confirm','image');
-    // }
 
     public function confirm($id)
     {

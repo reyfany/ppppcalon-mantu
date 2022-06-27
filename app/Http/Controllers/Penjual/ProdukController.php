@@ -76,8 +76,7 @@ class ProdukController extends Controller
         $inputan['status'] = $request->status;
         $inputan['image'] = $nama_file;
         $itemproduk = Produk::create($inputan);
-        Alert::success('Success', 'Data produk berhasil disimpan');
-        return redirect()->route('produk');
+        return redirect()->route('produk')->with('Success', 'Data produk berhasil disimpan');
     }
 
     /**
@@ -151,8 +150,7 @@ class ProdukController extends Controller
             $inputan['slug'] = $slug;
             $inputan['image'] = $nama_file;
             $itemproduk->update($inputan);
-            Alert::success('Success', 'Data produk berhasil diperbarui');
-            return redirect()->route('produk');     
+            return redirect()->route('produk')->with('Success', 'Data produk berhasil diperbarui');     
     }
 }
 
@@ -166,7 +164,6 @@ class ProdukController extends Controller
     {
         $produks = Produk::find($id);
         $produks->delete();
-        Alert::success('Success', 'Data produk berhasil dihapus');
-        return redirect('penjual/produk');
+        return redirect('penjual/produk')->with('Success', 'Data produk berhasil dihapus');
     }
 }

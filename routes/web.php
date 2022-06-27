@@ -70,9 +70,6 @@ Route::group(['prefix'=>'/penjual','middleware'=>['auth','penjual']],function(){
 // route pembeli
 Route::get('pembeli', 'Pembeli\PembeliController@index')->name('pembeli');
 Route::get('transaksi', 'TransaksiController@index')->name('transaksi');
-Route::get('/confirm/{id}', 'TransaksiController@indexconfirm')->name('confirm.index');
-Route::post('/confirm/store','TransaksiController@storeconfirm')->name('confirm.store');
-Route::get('/download/{id}', 'TransaksiController@getDownload')->name('download');
 Route::post('store', 'TransaksiController@store')->name('transaksi.store');
 Route::get('show/{id}', 'TransaksiController@show')->name('transaksi.show');
 Route::get('edit/{id}', 'TransaksiController@edit')->name('transaksi.edit');
@@ -80,7 +77,6 @@ Route::patch('update/{id}', 'TransaksiController@update')->name('transaksi.updat
 Route::delete('destroy/{id}', 'TransaksiController@destroy')->name('transaksi.destroy');
 Route::get('/confirm/{id}', 'TransaksiController@indexconfirm')->name('confirm.index');
 Route::post('upload/','TransaksiController@storeconfirm')->name('confirm.store');
-Route::get('donwload', 'TransaksiController@downloadconfirm')->name('confirm.download');
 
 
 Route::group(['prefix'=>'/pembeli','middleware'=>['auth','pembeli']],function(){

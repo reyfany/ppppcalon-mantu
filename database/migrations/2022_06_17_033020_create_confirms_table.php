@@ -16,7 +16,7 @@ class CreateConfirmsTable extends Migration
         Schema::create('confirms', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('cart_id')->unsigned();
+            // $table->integer('cart_id')->unsigned();
             $table->integer('order_id')->unsigned();
             $table->string('status');
             $table->text('image');
@@ -26,7 +26,7 @@ class CreateConfirmsTable extends Migration
 
         Schema::table('confirms',function(Blueprint $table){
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('cart_id')->references('id')->on('carts');
+            // $table->foreign('cart_id')->references('id')->on('carts');
             $table->foreign('order_id')->references('id')->on('orders');
         });
     }

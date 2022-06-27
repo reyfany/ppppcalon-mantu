@@ -7,7 +7,6 @@ use App\Cart;
 use App\AlamatPengiriman;
 use App\Order;
 use App\confirm;
-use Illuminate\Support\Facades\DB;
 
 
 class TransaksiController extends Controller
@@ -20,12 +19,7 @@ class TransaksiController extends Controller
     public function index(Request $request)
     {
         $itemuser = $request->user();
-        $confirms = confirm::with('order');
-        // $confirms = confirm::whereHas('confirm', function($q) {
-        //     $q->where('status', 'sudah');
-        // })
-        //     ->paginate(5); 
-
+        // $confirms = confirm::get();
         if ($itemuser->role == 'penjual') 
         {
             $itemorder = Order::whereHas('cart', function($q) {
@@ -51,7 +45,7 @@ class TransaksiController extends Controller
         $data = array('title' => 'Data Transaksi',
                     'itemorder' => $itemorder,
                     'itemuser' => $itemuser,
-                    'confirms' => $confirms
+                    // 'confirms' => $confirms
                 );
                 // dd($data);
                 // dd($data);
@@ -209,18 +203,18 @@ class TransaksiController extends Controller
         return view('transaksi.konfirmasi', $data);
     }
 
-    public function storeconfirm(Request $request)
+    public function storeconfirm(Request $request, $id)
     {
         $itemuser = $request->user();
-        $itemcart = Cart::where('user_id', $itemuser->id)->firstOrFail();
-        $itemorder = Order::where('cart_id', $itemcart->id)->first();
+        $itemorder = Order::findorfail($id);
+        // $itemorder = Order::where('cart_id', $itemcart->id)->first();
         $confirm = new confirm();
         $file = $request->file('image');
         $ext = $file->getClientOriginalExtension();
         $newName = rand(100000,1001238912).".".$ext;
         $file->move('assets/images/', $newName);
 
-        $confirm->cart_id       = $itemcart->id;
+        // $confirm->cart_id       = $itemcart->id;
         $confirm->user_id       = $itemuser->id;
         $confirm->order_id      = $itemorder->id;
         $confirm->image         = $newName;
@@ -228,8 +222,7 @@ class TransaksiController extends Controller
         // dd($confirm);
         $confirm->save();
 
-        // Alert::success('Success', 'Konfirmasi Bukti Pembayaran Berhasil Dikirim');
-        return back()->with('success','Order berhasil diupdate');
+        return back()->with('success', 'Konfirmasi Bukti Pembayaran Berhasil Dikirm');
     }
 
 }

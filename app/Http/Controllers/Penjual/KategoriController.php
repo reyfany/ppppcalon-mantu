@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Penjual;
 
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Kategori;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -56,8 +55,7 @@ class KategoriController extends Controller
         //slug kita gunakan nanti pas buka produk per kategori
         $inputan['status'] = 'active';//status kita set langsung active saja
         $itemkategori = Kategori::create($inputan);
-        Alert::success('Success', 'Data kategori berhasil disimpan');
-        return redirect('penjual/kategori');
+        return redirect('penjual/kategori')->with('Success', 'Data kategori berhasil disimpan');
     }
 
     /**
@@ -110,8 +108,7 @@ class KategoriController extends Controller
             $inputan = $request->all();
             $inputan['slug'] = $slug;
             $itemkategori->update($inputan);
-            Alert::success('Success', 'Data kategori berhasil diubah');
-            return redirect()->route('kategori');
+            return redirect()->route('kategori')->with('Success', 'Data kategori berhasil diubah');
         }
     }
 
@@ -129,12 +126,11 @@ class KategoriController extends Controller
             return back()->with('error', 'Hapus dulu produk di dalam kategori ini, proses dihentikan');
         } else {
             if ($itemkategori->delete()) {
-                Alert::success('Success', 'Data kategori berhasil dihapus');
+                return back()->with('Success', 'Data kategori berhasil dihapus');
             } else {
                 return back()->with('error', 'Data gagal dihapus');
             }
         }
-        Alert::success('Success', 'Data kategori berhasil dihapus');
-        return redirect()->route('kategori');
+        return redirect()->route('kategori')->with('Success', 'Data kategori berhasil dihapus');
     }
 }

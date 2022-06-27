@@ -23,6 +23,6 @@ class confirm extends Model
     }
 
     public function Order() {
-        return $this->hasMany('App\Order');
+        return $this->belongsTo('App\Order');
     }
 }
