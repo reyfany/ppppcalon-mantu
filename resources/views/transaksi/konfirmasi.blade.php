@@ -33,6 +33,16 @@
                     </div>
                 
                     <div class="container-fluid">
+                        @if ($message = Session::get('error'))
+                          <div class="alert alert-warning">
+                              <p>{{ $message }}</p>
+                          </div>
+                      @endif
+                      @if ($message = Session::get('success'))
+                          <div class="alert alert-success">
+                              <p>{{ $message }}</p>
+                          </div>
+                      @endif
                       <div class="row">
                         <div class="col col-lg-5">
                           {{-- <div class="card card-primary card-outline"> --}}
@@ -40,8 +50,9 @@
                               <h3 class="card-title">Form Pembayaran</h3>
                             </div>
                             <div class="card-body">
-                              <form role="form" id="ajax" method="post" action="{{ route('confirm.store') }}" enctype="multipart/form-data">
-                                @csrf()
+                              <form action="{{ route('confirm.store', $itemuser->id ) }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('PATCH')
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label>Email User</label>
@@ -53,7 +64,7 @@
                                     </div>
                                 {{-- {{$itemuser->id}} --}}
                                     <div class="box-footer">
-                                        <button type="submit" class="btn btn-primary"  id="confirm">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
                                 </div>
                             </form>
@@ -66,8 +77,6 @@
             </div>
             <!-- footer start-->
             @include('pembeli.layout.bottom')
-
         </div>
-        @include('sweetalert::alert')
     </div>
 </html>

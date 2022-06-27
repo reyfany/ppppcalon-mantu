@@ -7,6 +7,7 @@ use App\Cart;
 use App\AlamatPengiriman;
 use App\Order;
 use App\confirm;
+use Illuminate\Support\Facades\DB;
 
 
 class TransaksiController extends Controller
@@ -19,7 +20,7 @@ class TransaksiController extends Controller
     public function index(Request $request)
     {
         $itemuser = $request->user();
-        // $confirms = confirm::get();
+        $confirms = confirm::get();
         if ($itemuser->role == 'penjual') 
         {
             $itemorder = Order::whereHas('cart', function($q) {
@@ -27,7 +28,7 @@ class TransaksiController extends Controller
             })
             
                 ->orderBy('id')
-                ->paginate(5);
+                ->paginate(15);
         }
         
 
@@ -39,17 +40,17 @@ class TransaksiController extends Controller
                             $q->where('user_id', $itemuser->id);
                         })
                         ->orderBy('id')
-                        ->paginate(5);
+                        ->paginate(15);
         }
         // dd($confirms);
         $data = array('title' => 'Data Transaksi',
                     'itemorder' => $itemorder,
                     'itemuser' => $itemuser,
-                    // 'confirms' => $confirms
+                    'confirms' => $confirms
                 );
                 // dd($data);
                 // dd($data);
-        return view('transaksi.index', $data)->with('no', ($request->input('page', 1) - 1) * 5);
+        return view('transaksi.index', $data);
     }
 
     /**
@@ -206,8 +207,7 @@ class TransaksiController extends Controller
     public function storeconfirm(Request $request, $id)
     {
         $itemuser = $request->user();
-        $itemorder = Order::findorfail($id);
-        // $itemorder = Order::where('cart_id', $itemcart->id)->first();
+        $itemorder = Order::where('cart_id', $id)->latest()->first();
         $confirm = new confirm();
         $file = $request->file('image');
         $ext = $file->getClientOriginalExtension();

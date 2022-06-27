@@ -76,7 +76,7 @@ Route::get('edit/{id}', 'TransaksiController@edit')->name('transaksi.edit');
 Route::patch('update/{id}', 'TransaksiController@update')->name('transaksi.update');
 Route::delete('destroy/{id}', 'TransaksiController@destroy')->name('transaksi.destroy');
 Route::get('/confirm/{id}', 'TransaksiController@indexconfirm')->name('confirm.index');
-Route::post('upload/','TransaksiController@storeconfirm')->name('confirm.store');
+Route::patch('upload/{id}','TransaksiController@storeconfirm')->name('confirm.store');
 
 
 Route::group(['prefix'=>'/pembeli','middleware'=>['auth','pembeli']],function(){

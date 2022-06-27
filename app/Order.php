@@ -10,7 +10,6 @@ class Order extends Model
     protected $table = 'orders';
     // protected $primaryKey= 'id';
     protected $fillable = [
-        'id',
         'cart_id',
         'nama_penerima',
         'no_tlp',
@@ -40,7 +39,7 @@ class Order extends Model
 
     public function confirm($id)
     {
-      $confirm = confirm::where('order_id', $id)->first();
+      $confirm = confirm::where('order_id', $id)->latest()->first();
       return $confirm;
     }
 }

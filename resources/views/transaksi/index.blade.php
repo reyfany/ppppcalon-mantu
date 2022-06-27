@@ -53,7 +53,7 @@
                           </div>
                       @endif
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped text-center" id="test">
+                                <table class="table table-bordered table-striped text-center">
                                     <thead>
                                         <tr>
                                             <th scope="col ">No</th>
@@ -70,10 +70,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                      <?php $no=1;?>
                                         @foreach($itemorder as $order)
                                           <tr>
                                             <td>
-                                              {{ ++$no }}
+                                              {{ $no }}
                                             </td>
                                             <td>
                                               {{ $order->cart->no_invoice }}
@@ -96,9 +97,11 @@
                                             </td>
                                             @if($itemuser->role == 'penjual')
                                             <td>
+                                              {{-- @foreach ($itemorder as $data) --}}
                                               @if ($order->confirm($order->id) == true)
                                               <a href="{{ url('assets/images/'. $order->confirm($order->id)->image)}}">  <button class="icon-download btn bg-danger" download type="button"></button></a>
                                               @endif
+                                              {{-- @endforeach --}}
                                             </td>
                                             @endif
                                             <td class="justify-content-center d-flex">
@@ -117,6 +120,7 @@
                                               @endif
                                             </td>
                                           </tr>
+                                          <?php $no++ ;?>
                                         @endforeach
                                         </tbody>
                                 </table>
@@ -130,13 +134,4 @@
             @include('pembeli.layout.bottom')
         </div>
     </div>
-    {{-- <script>
-        $(document).ready(function() {
-            $('#test').DataTable({
-                "paging": false,
-                "ordering": false,
-                "info":     false
-            });
-        });
-    </script> --}}
 </html>
