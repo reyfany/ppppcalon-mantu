@@ -9,7 +9,7 @@
 					<div class="col-12">
 						<div class="bread-inner">
 							<ul class="bread-list">
-								<li><a href="index1.html">Home</a></li>
+								<li><a href="/">Home</a></li>
 							</ul>
 						</div>
 					</div>
@@ -130,7 +130,7 @@
                           </div>
                           <div class="form-group">
                             <label for="no_tlp">No Tlp</label>
-                            <input type="text" name="no_tlp" class="form-control" value={{old('no_tlp') }}>
+                            <input type="number" min="0" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxLengthCheck="12" maxlength = "12" class="form-control " class="form-control" name="no_tlp" value={{old('no_tlp') }}>
                           </div>
                           <div class="form-group">
                             <label for="provinsi">Provinsi</label>
@@ -168,4 +168,10 @@
 					</div>
 			</div>
 		</section>
+    <script>
+      function maxLengthCheck(object) {
+         if (object.value.length > object.maxLength)
+             object.value = object.value.slice(0, object.maxLength)
+     };
+ </script>
 @endsection
