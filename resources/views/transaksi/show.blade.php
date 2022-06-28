@@ -174,22 +174,6 @@
                                       {{ number_format($itemorder->cart->ongkir, 2) }}
                                       </td>
                                     </tr>
-                                    {{-- <tr>
-                                      <td>
-                                        Ekspedisi
-                                      </td>
-                                      <td>
-                                      {{ ($itemorder->cart->ekspedisi) }}
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        No. Resi
-                                      </td>
-                                      <td>
-                                      {{ ($itemorder->cart->no_resi) }}
-                                      </td>
-                                    </tr> --}}
                                     <tr>
                                       <td>
                                         Status Pembayaran
@@ -208,25 +192,6 @@
                                     </tr>
                                   </tbody>
                                 </table>
-                                   {{-- @if(auth()->user()->role == "pembeli")
-                              <form role="form" method="post" action="{{ route('confirm.store') }}" enctype="multipart/form-data">
-                                @csrf()
-                                <div class="box-body">
-                                    <div class="form-group">
-                                        <label>Email User</label>
-                                        <input type="text"  class="form-control" value="  {{ $itemorder->cart->no_invoice }}"  readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Upload Bukti Pembayaran</label>
-                                        <input type="file" class="form-control" name="image" style="height: 44px; cursor:pointer;">
-                                    </div>
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                              @endif --}}
                               </div>
                             </div>
                         </div>

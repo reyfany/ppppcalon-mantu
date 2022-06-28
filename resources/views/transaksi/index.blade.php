@@ -60,7 +60,8 @@
                                             <th scope="col ">Invoice</th>
                                             <th scope="col ">Sub Total</th>
                                             <th scope="col ">Ongkir</th>
-                                            <th scope="col ">Total</th>
+                                            <th>Alamat</th>
+                                            {{-- <th scope="col ">Total</th> --}}
                                             <th scope="col ">Status Pembayaran</th>
                                             <th scope="col ">Status Pengiriman</th>  
                                             @if($itemuser->role == 'penjual')
@@ -86,13 +87,26 @@
                                               {{ number_format($order->cart->ongkir, 2) }}
                                             </td>
                                             <td>
+                                              {{ $order->alamat }}
+                                            </td>
+                                            {{-- <td>
                                               {{ number_format($order->cart->total, 2) }}
-                                            </td>                  
+                                            </td>                   --}}
                                             <td>
-                                              {{ $order->cart->status_pembayaran }}
+                                              @if($order->cart->status_pembayaran=='sudah')
+                                              <span class="badge badge-success">{{ $order->cart->status_pembayaran }}</span>
+                                              @else
+                                                  <span class="badge badge-warning">{{ $order->cart->status_pembayaran }}</span>
+                                              @endif
+                                              {{-- {{ $order->cart->status_pembayaran }} --}}
                                             </td>
                                             <td>
-                                              {{ $order->cart->status_pengiriman }}
+                                              @if($order->cart->status_pembayaran=='sudah')
+                                                  <span class="badge badge-success">{{ $order->cart->status_pengiriman }}</span>
+                                              @else
+                                                  <span class="badge badge-warning">{{ $order->cart->status_pengiriman }}</span>
+                                              @endif
+                                              {{-- {{ $order->cart->status_pengiriman }} --}}
                                             
                                             </td>
                                             @if($itemuser->role == 'penjual')

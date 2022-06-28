@@ -102,7 +102,7 @@
                                                 <div class="col-sm-4 ">
                                                     <div class="form-group ">
                                                         <label class="form-label ">Role</label>
-                                                        <select name="role" class="form-control" readonly>
+                                                        <select name="role" class="form-control" disabled>
                                                             <option value="">-----Select Role-----</option>
                                                             <option value="{{$profile->role}}" {{(($profile->role=='admin') ? 'selected' : '')}}>Admin</option>
                                                             <option value="{{$profile->role}}" {{(($profile->role=='penjual') ? 'selected' : '')}}>Penjual</option>
