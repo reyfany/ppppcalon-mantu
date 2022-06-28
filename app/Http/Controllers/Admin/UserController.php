@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use Alert;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -72,8 +70,7 @@ class UserController extends Controller
         // upload file
         $file->move($tujuan_upload, $nama_file);
         $user->save();
-        Alert::success('Success', 'Data user berhasil disimpan');
-        return redirect('admin/users');
+        return redirect('admin/users')->with('Success', 'Data user berhasil disimpan');
     }
 
     /**
@@ -156,8 +153,7 @@ class UserController extends Controller
 
         $user->save();
         // $user->update();
-        Alert::success('Success', 'Data user berhasil diperbarui');
-        return redirect('admin/users');
+        return redirect('admin/users')->with('Success', 'Data user berhasil diperbarui');
     }
 
     /**
@@ -170,7 +166,6 @@ class UserController extends Controller
     {
         $user=User::findorFail($id);
         $user->delete();
-        Alert::success('Success', 'Data user berhasil dihapus');
-        return redirect('admin/users');
+        return redirect('admin/users')->with('Success', 'Data user berhasil dihapus');
     }
 }
