@@ -64,46 +64,46 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="form-label">Nama</label>
-                                                        <input class="form-control" type="text" placeholder="Nama"  name="name">
+                                                        <input class="form-control" type="text" placeholder="Nama"  name="name" value="{{ old('name') }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label class="form-label">Email</label>
-                                                        <input class="form-control" type="email" placeholder="Email" name="email">
+                                                        <input class="form-control" type="email" placeholder="Email" name="email" value="{{ old('email') }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label class="form-label">Password</label>
-                                                        <input class="form-control" type="password" placeholder="********" name="password">
+                                                        <input class="form-control" type="password" placeholder="********" name="password" value="{{ old('password') }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label class="form-label">Konfirmasi Password</label>
-                                                        <input class="form-control" type="password" placeholder="********" name="konfirm_password">
+                                                        <input class="form-control" type="password" placeholder="********" name="konfirm_password" value="{{ old('konfirmasi_password') }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label class="form-label">No Telepon</label>
-                                                        <input type="number" min="0" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxLengthCheck="12" maxlength = "12" class="form-control " placeholder="Nomor Telepon" name="phone" required=" " />
+                                                        <input type="number" min="0" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxLengthCheck="12" maxlength = "12" class="form-control " placeholder="Nomor Telepon" name="phone" value="{{ old('phone') }}" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group ">
                                                         <label class="form-label">Alamat</label>
-                                                        <input class="form-control" type="text" placeholder="Alamat" name="alamat">
+                                                        <input class="form-control" type="text" placeholder="Alamat" name="alamat" value="{{ old('alamat') }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 ">
                                                     @php 
-                                                    $roles=DB::table('users')->select('role')->get();
+                                                    $roles=DB::table('users')->select('role')->limit(3)->get();
                                                     @endphp
                                                     <div class="form-group ">
                                                         <label class="form-label ">Role</label>
-                                                        <select name="role" class="form-control">
+                                                        <select name="role" class="form-control" value="{{ old('role') }}">
                                                             <option value="">~pilih role~</option>
                                                             @foreach($roles as $role)
                                                             <option value="{{$role->role}}">{{$role->role}}</option>

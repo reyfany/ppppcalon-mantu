@@ -109,7 +109,7 @@
                                                     @endphp
                                                     <div class="form-group ">
                                                         <label class="form-label ">Role</label>
-                                                        <select name="role" class="form-control" readonly>
+                                                        <select name="role" class="form-control" disabled>
                                                             @foreach($roles as $role)
                                                             <option value="{{$role->role}}" {{(($role->role=='admin') ? 'selected' : '')}}>Admin</option>
                                                             <option value="{{$role->role}}" {{(($role->role=='penjual') ? 'selected' : '')}}>Penjual</option>

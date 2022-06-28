@@ -13,7 +13,7 @@
         </form>
         <div class="main-header-left">
             <div class="logo-wrapper">
-                <a href="index.html"><img class="img-fluid" src="{{asset('assetsku/images/logo/logo.png')}}" alt=""></a>
+                <a href="admin"><img class="img-fluid" src="{{asset('assetsku/images/logo/logo.png')}}" alt=""></a>
             </div>
             <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle"> </i></div>
         </div>

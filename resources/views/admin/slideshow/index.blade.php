@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col-6">
                                     <ol class="breadcrumb pull-right">
-                                        <li class="breadcrumb-item"><a href="dashboard.html"><i data-feather="home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="admin"><i data-feather="home"></i></a></li>
                                         <li class="breadcrumb-item">Slideshow</li>
                                         <li class="breadcrumb-item">Data Slide</li>
                                     </ol>
@@ -53,7 +53,7 @@
                                       <th width="50px">No</th>
                                       <th>Gambar</th>
                                       <th>Title</th>
-                                      <th>Content</th>
+                                      {{-- <th>Content</th> --}}
                                       <th>Action</th>
                                     </tr>
                                   </thead>
@@ -71,14 +71,14 @@
                                       <td>
                                       {{ $slide->caption_title }}
                                       </td>
-                                      <td>
+                                      {{-- <td>
                                       {{ $slide->caption_content }}
-                                      </td>
+                                      </td> --}}
                                       <td>
                                         <form action="{{ route('slideshow.destroy', $slide->id) }}" method="post" style="display:inline;">
                                           @csrf
                                           {{ method_field('delete') }}
-                                          <button type="submit" class="btn btn-sm btn-danger mb-2">
+                                          <button type="submit" class="btn btn-sm btn-danger mb-2" onclick="return confirm('Apakah anda yakin akan menghapus?')" >
                                             Hapus
                                           </button>                    
                                         </form>
@@ -91,29 +91,31 @@
                               </div>
                             </div>
                             <br>
-                            <div class="container-fluid">
-                              <div class="row">
-                                <div class="col-4">
-                                  <form action="{{ url('/admin/slideshow') }}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="form-group">
-                                      <label for="foto">Foto</label>
-                                      <br />
-                                      <input type="file" name="image" id="image">
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="caption_title">Title</label>
-                                      <input type="text" name="caption_title" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="caption_content">Content</label>
-                                      <textarea name="caption_content" id="caption_content" rows="3" class="form-control"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                      <button class="btn btn-primary">Upload</button>
-                                    </div>
-                                  </form>
-                                
+                            <div class="card-body">
+                              <div class="container-fluid">
+                                <div class="row">
+                                  <div class="col-4">
+                                    <form action="{{ url('/admin/slideshow') }}" method="post" enctype="multipart/form-data">
+                                      @csrf
+                                      <div class="form-group">
+                                        <label for="foto">Foto</label>
+                                        <br />
+                                        <input type="file" name="image" id="image">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="caption_title">Title</label>
+                                        <input type="text" name="caption_title" class="form-control">
+                                      </div>
+                                      {{-- <div class="form-group">
+                                        <label for="caption_content">Content</label>
+                                        <textarea name="caption_content" id="caption_content" rows="3" class="form-control"></textarea>
+                                      </div> --}}
+                                      <div class="form-group">
+                                        <button class="btn btn-primary">Upload</button>
+                                      </div>
+                                    </form>
+                                  
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -125,7 +127,6 @@
                 @include('admin.layout.bottom')
             </div>
         </div>
-        @include('sweetalert::alert')
         <script>
           $(document).ready(function() {
               $('#test').DataTable({

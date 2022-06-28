@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col-6">
                                     <ol class="breadcrumb pull-right">
-                                        <li class="breadcrumb-item"><a href="dashboard.html"><i data-feather="home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="admin"><i data-feather="home"></i></a></li>
                                         <li class="breadcrumb-item">Users</li>
                                         <li class="breadcrumb-item">Data Users</li>
                                     </ol>
@@ -33,7 +33,7 @@
                     </div>
                         <div class="container-fluid">
                             <a href="{{route('users.create')}}">
-                                <button class="text-white btn btn-success pull-right mb-2" type="button" title="tambah user"><i class="fa fa-plus">
+                                <button class="text-white btn btn-success pull-right mb-2" type="button" title="tambah data"><i class="fa fa-plus">
                                     </i>&emsp; Tambah User
                                 </button>  
                             </a>                                         
@@ -56,7 +56,7 @@
                                             <th scope="col ">Email</th>
                                             <th scope="col ">Foto</th>
                                             <th scope="col ">Role</th>
-                                            <th scope="col ">No Telepon</th>
+                                            {{-- <th scope="col ">No Telepon</th> --}}
                                             <th scope="col ">Action</th>
                                         </tr>
                                     </thead>
@@ -74,9 +74,9 @@
                                                 @endif
                                             </td>
                                             <td>{{$user->role}}</td>
-                                            <td>{{$user->phone}}</td>
+                                            {{-- <td>{{$user->phone}}</td> --}}
                                             <td class="d-flex justify-content-center">
-                                                <a href="{{route('users.edit',$user->id)}}"> <button class="icon-pencil-alt btn btn-primary mr-2" type="button" title="ubah data"></button> </a>
+                                                <a href="{{route('users.edit',$user->id)}}"> <button class="icon-pencil-alt btn btn-primary mr-1" type="button" title="ubah data"></button> </a>
                                                 <form method="POST" action="{{route('users.destroy',[$user->id])}}" method="post">
                                                     @csrf 
                                                     @method('delete')

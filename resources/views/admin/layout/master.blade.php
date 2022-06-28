@@ -23,7 +23,7 @@
                             </div>
                             <div class="col-6">
                                 <ol class="breadcrumb pull-right">
-                                    <li class="breadcrumb-item"><a href="dashboard.html"><i data-feather="home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="admin"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item">Dashboard</li>
                                 </ol>
                             </div>
