@@ -58,17 +58,15 @@
 										</td>
 										<td>
 										{{ $detail->produk->nama_produk }}
-										<br />
-										{{ $detail->produk->kode_produk }}
 										</td>
 										<td>
-										{{ number_format($detail->harga, 2) }}
+										Rp. {{ number_format($detail->harga, 2) }}
 										</td>
 										<td>
 										{{ number_format($detail->qty) }} produk
 										</td>
 										<td>
-										{{ number_format($detail->subtotal, 2) }}
+										Rp. {{ number_format($detail->subtotal, 2) }}
 										</td>
 									</tr>
 									@endforeach
@@ -87,8 +85,8 @@
 										<thead>
 											<tr>
 												<th>Nama Penerima</th>
-												<th>Alamat</th>
-												<th>No tlp</th>
+												<th>Alamat Lengkap</th>
+												<th>No Telp</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -135,8 +133,8 @@
 										<div class="content">
 											<ul>
 												<li>No Invoice<span> {{ $itemcart->no_invoice }}</span></li>
-												<li>Subtotal<span> {{ number_format($itemcart->subtotal, 2) }}</span></li>
-												<li>Total<span>{{ number_format($itemcart->total, 2) }}</span></li>
+												<li>Subtotal<span> Rp. {{ number_format($itemcart->subtotal, 2) }}</span></li>
+												<li>Total<span>Rp. {{ number_format($itemcart->total, 2) }}</span></li>
 											</ul>
 										</div>
 									</div>
