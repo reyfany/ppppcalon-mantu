@@ -1,32 +1,5 @@
 @extends('frontend.layout.master')
 @section('title','MARKETPLACE || Cart')
-<style>
-	.counter {
-            display: flex; 
-        }
-        
-        .counter input {
-            width: 50px;
-            border: 0;
-            line-height: 30px;
-            font-size: 20px;
-            text-align: center;
-            /* background: #0052cc; */
-            color: #fff;
-            appearance: none;
-            outline: 0;
-        }
-        
-        .counter span {
-            display: block;
-            font-size: 25px;
-            padding: 0 10px;
-            cursor: pointer;
-            color: #0a0c0f;
-            user-select: none;
-        }
-</style>
-
 @section('content')
 	<!-- Breadcrumbs -->
 	<div class="breadcrumbs">
@@ -35,8 +8,8 @@
 				<div class="col-12">
 					<div class="bread-inner">
 						<ul class="bread-list">
-							<li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li>
-							<li class="active"><a href="blog-single.html">Cart</a></li>
+							<li><a href="/">Home<i class="ti-arrow-right"></i></a></li>
+							<li class="active"><a href="cart">Cart</a></li>
 						</ul>
 					</div>
 				</div>
@@ -66,38 +39,36 @@
 		<div class="row">
 			<div class="col-12">
 				<!-- Shopping Summery -->
-				<table class="table shopping-cart  table-responsive table-borderless">
+				<table class="table shopping-summery table-responsive table-bordered">
 					<thead>
 						<tr>
 							<th>NO</th>
 							<th>PRODUK</th>
 							<th>HARGA</th>
-							<th >JUMLAH</th>
-							<th >SUB TOTAL</th> 
-							<th ><i class="ti-trash remove-icon"></i></th>
+							<th>JUMLAH</th>
+							<th>SUB TOTAL</th> 
+							<th><i class="ti-trash remove-icon"></i></th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($itemcart->detail as $detail)
 						<tr>
 							<td>
-								{{ $no++ }}
+								<b>{{ $no++ }}</b>
 							</td>
 							<td>
-								{{ $detail->produk->nama_produk }}
-								<br />
-								{{ $detail->produk->kode_produk }}
+								<b>{{ $detail->produk->nama_produk }}</b>
 							</td>
 							<td>
-								{{ number_format($detail->harga, 2) }}
+								<b>Rp. {{ number_format($detail->harga, 2) }}</b>
 							</td>
 							<td>
-								<div class="btn-group" role="group">
+								{{-- <div class="btn-group" role="group">
 									<form action="{{ route('cartdetail.update',$detail->id) }}" method="post" class="form-user">
 									@method('patch')
 									@csrf()
-									<input type="hidden" class="input kurangi-qty" name="param" value="kurang" min="1">
-									<button class="btn btn-primary btn-sm kurangi-qty" >-</button>
+										<input type="hidden" class="input kurangi-qty" name="param" value="kurang" min="1">
+										<button class="btn btn-primary btn-sm kurangi-qty" >-</button>
 									</form>
 									
 									<button class="btn btn-outline-primary btn-sm tampildata" disabled>{{($detail->qty) }}</button>
@@ -108,10 +79,17 @@
 									<input type="hidden" name="param" value="tambah">
 									<button class="btn btn-primary btn-sm">+</button>
 									</form>
+								</div> --}}
+								<div class="btn-group" role="group">
+									<button class="btn btn-primary btn-sm" id="kurang{{$detail->id}}" >-</button>
+									<input type="hidden" class="text-center" min="1" id="harga{{$detail->id}}" value="{{ $detail->harga }}">
+									<input type="text" class="text-center" min="1" id="qty{{$detail->id}}" value="{{ $detail->qty }}" style="width: 80px" disabled>
+									<button class="btn btn-primary btn-sm" id="tambah{{$detail->id}}">+</button>
 								</div>
 							</td>
 							<td>
-									{{ number_format($detail->subtotal, 2) }}
+									<h6 id="totalqty{{$detail->id}}">Rp. {{$detail->subtotal}}</h6>
+									{{-- {{ number_format($detail->subtotal, 2) }} --}}
 							</td>
 							<td>
 									<form action="{{ route('cartdetail.destroy', $detail->id) }}" method="post" style="display:inline;">
@@ -141,11 +119,25 @@
 								<div class="right">
 									<ul>
 										<li>Nomor Invoice<span>{{ $itemcart->no_invoice }}</span></li>
+										<li>Subtotal <span id="subtotal">Rp. {{ '0' }}</span></li>
+										<li class="last">Total Pembayaran <span id="total">Rp. {{ '0' }}</span></li>
+										{{-- <li>Nomor Invoice<span>{{ $itemcart->no_invoice }}</span></li>
 										<li>Subtotal <span>{{ number_format($itemcart->subtotal, 2) }}</span></li>
-										<li class="last">Total Pembayaran<span>  {{ number_format($itemcart->total, 2) }}</span></li>
+										<li class="last">Total Pembayaran<span>  {{ number_format($itemcart->total, 2) }}</span></li> --}}
 									</ul>
 									<div class="button5">
-										<a href="{{ route('checkout') }}" class="btn" id="button">Checkout</a>
+										<form action="{{ route('checkout') }}" >
+											@foreach($itemcart->detail as $detail)
+											<input type="hidden" id="jml{{$detail->id}}" name="jumlah[]">
+											<input type="hidden" id="stl{{$detail->id}}" name="subtotal[]">
+											@endforeach
+											<input type="hidden" id=no_invoice name="no_invoice" value="{{ $itemcart->no_invoice }}" >
+											<input type="hidden" id="ttl" name="total" >
+											<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+											<button type="submit" class="btn btn-info">Checkout</button> 
+											{{-- <a href="" class="btn" id="button">Checkout</a> --}}
+										</form>
+										{{-- <a href="{{ route('checkout') }}" class="btn" id="button">Checkout</a> --}}
 									</div>
 									<div class="button5">
 									<form action="{{ url('kosongkan').'/'.$itemcart->id }}" method="post">
@@ -164,7 +156,87 @@
 		</div>
 	</div>
 
+	<script src="{{asset('frontend/js/jquery.min.js')}}"></script>
+
 	<script type="text/javascript">
-     
-    </script>
+		$(document).ready(function() {
+			var subtotal = 0;
+			var id = $("#idbarang").val(id);
+
+			<?php 
+			foreach($itemcart->detail as $detail){
+			?>
+				var qty{{$detail->id}} = $('#qty{{$detail->id}}').val();
+				var harga{{$detail->id}} = $('#harga{{$detail->id}}').val();
+				var q{{$detail->id}} = parseInt(qty{{$detail->id}});
+				var total{{$detail->id}} = q{{$detail->id}} * harga{{$detail->id}};
+				var hasil{{$detail->id}} = 'Rp. ' + (total{{$detail->id}}/1000).toFixed(3);
+				
+				id = id + {{ $detail->id }};
+				$("#idbarang").val(id);
+
+				// data ringkasan pembayaran
+				subtotal = subtotal + total{{$detail->id}};
+				$("#subtotal").text( 'Rp. ' + (subtotal/1000).toFixed(3)); //sub total
+				$("#total").text( 'Rp. ' + (subtotal/1000).toFixed(3)); //total pembayaran
+
+
+				$("#jml{{$detail->id}}").val(q{{$detail->id}});
+				$("#stl{{$detail->id}}").val(total{{$detail->id}});
+				$("#ttl").val(subtotal);
+
+			
+			
+			
+			
+				
+				
+		  $("body").on("click", "#tambah{{$detail->id}}", function(event){ 
+
+				q{{$detail->id}}++;
+				total{{$detail->id}} = q{{$detail->id}} * harga{{$detail->id}};
+				hasil{{$detail->id}} = 'Rp. ' + (total{{$detail->id}}/1000).toFixed(3);
+				subtotal = parseInt(subtotal) + parseInt(harga{{$detail->id}});
+				$("#totalqty{{$detail->id}}").text(hasil{{$detail->id}});
+				$("#qty{{$detail->id}}").val(q{{$detail->id}});
+				$("#subtotal").text( 'Rp. ' + (subtotal/1000).toFixed(3));
+				$("#total").text( 'Rp. ' + (subtotal/1000).toFixed(3));
+				// $("#total").text(hasil);
+				// $("#totalpembayaran").val(total);
+				//  $("#jumlahpesanan").val(q);
+
+				
+				$("#jml{{$detail->id}}").val(q{{$detail->id}});
+				$("#stl{{$detail->id}}").val(total{{$detail->id}});
+				$("#ttl").val(subtotal);
+			});
+	
+			$("body").on("click", "#kurang{{$detail->id}}", function(event){ 
+				q{{$detail->id}}--;
+				total{{$detail->id}} = q{{$detail->id}} * harga{{$detail->id}};
+				hasil{{$detail->id}} = 'Rp. ' + (total{{$detail->id}}/1000).toFixed(3);
+				subtotal = parseInt(subtotal) - parseInt(harga{{$detail->id}});
+				$("#totalqty{{$detail->id}}").text(hasil{{$detail->id}});
+				$("#qty{{$detail->id}}").val(q{{$detail->id}});
+				$("#subtotal").text( 'Rp. ' + (subtotal/1000).toFixed(3));
+				$("#total").text( 'Rp. ' + (subtotal/1000).toFixed(3));
+				// $("#total").text(hasil);
+				// $("#totalpembayaran").val(total);
+				//  $("#jumlahpesanan").val(q);
+
+
+				
+				$("#jml{{$detail->id}}").val(q{{$detail->id}});
+				$("#stl{{$detail->id}}").val(total{{$detail->id}});
+				$("#ttl").val(subtotal);
+				
+			});
+
+			
+			<?php } ?>
+
+
+		  
+		});
+	</script>
 @endsection

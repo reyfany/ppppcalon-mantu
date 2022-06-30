@@ -102,6 +102,15 @@ class CartController extends Controller
     }
 
     public function checkout(Request $request) {
+
+
+    //    dd($request->all());
+        $itemcart = Cart::find($request->id);
+        // $itemcart->jumlah = $request->jumlah;
+        // $itemcart->subtotal = $request->subtotal;
+        
+
+
         $itemuser = $request->user();
         $itemcart = Cart::where('user_id', $itemuser->id)
                         ->where('status_cart', 'cart')
