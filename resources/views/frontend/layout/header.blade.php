@@ -62,7 +62,7 @@
                                         <ul class="nav main-menu menu navbar-nav">
                                             <li><a href="{{route('home')}}">Home</a></li>
                                             <li><a href="{{route('cart')}}">Cart</a></li>
-                                            <li><a href="{{route('checkout') }}">Checkout</a></li>
+                                            {{-- <li><a href="{{route('checkout') }}">Checkout</a></li> --}}
                                         </ul>
                                     </div>
                                 </div>
