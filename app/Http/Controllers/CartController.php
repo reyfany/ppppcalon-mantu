@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\AlamatPengiriman;
+use App\CartDetail;
+use App\Produk;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -102,14 +104,23 @@ class CartController extends Controller
     }
 
     public function checkout(Request $request) {
-
-
-    //    dd($request->all());
-        $itemcart = Cart::find($request->id);
-        // $itemcart->jumlah = $request->jumlah;
-        // $itemcart->subtotal = $request->subtotal;
         
+        $total = 0;
+        for ($i=0; $i < sizeof($request->id); $i++) { 
+            $cartdetail = CartDetail::find($request->id[$i]);
+            $cartdetail->qty = $request->jumlah[$i];
+            $cartdetail->subtotal = $request->subtotal[$i];
+            $cartdetail->update();
+            
+            $total = $total + $cartdetail->subtotal;
+        }
 
+        $cart_id = $cartdetail->cart_id;
+        // $itemcart->jumlah;
+
+         // Saving links array to the session
+
+        
 
         $itemuser = $request->user();
         $itemcart = Cart::where('user_id', $itemuser->id)
@@ -121,6 +132,8 @@ class CartController extends Controller
         if ($itemcart) {
             $data = array('title' => 'Checkout',
                         'itemcart' => $itemcart,
+                        'total' => $total,
+                        'cart_id' => $cart_id,
                         'itemalamatpengiriman' => $itemalamatpengiriman);
             return view('frontend.pages.checkout', $data)->with('no', 1);
         } else {

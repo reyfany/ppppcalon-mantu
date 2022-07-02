@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\AlamatPengiriman;
+use App\CartDetail;
 use App\Order;
 use App\confirm;
 use Illuminate\Support\Facades\DB;
@@ -23,24 +24,39 @@ class TransaksiController extends Controller
         $confirms = confirm::get();
         if ($itemuser->role == 'penjual') 
         {
-            $itemorder = Order::whereHas('cart', function($q) {
-                $q->where('status_cart', 'checkout');
-            })
+            // $itemorder = Order::whereHas('cart', function($q) {
+            //     $q->where('status_cart', 'checkout');
+            //     $q->where('user_id', 'checkout');
+            // })
             
-                ->orderBy('id')
-                ->paginate(15);
+            //     ->orderBy('id')
+            //     ->paginate(15);
+
+                $itemorder = Order::select('carts.no_invoice as no_invoice', DB::raw('orders.*, orders.id as orderID, carts.status_pembayaran, carts.status_pengiriman') )
+                                ->join('carts', 'carts.id', '=', 'orders.cart_id')
+                                ->join('cart_details', 'cart_details.cart_id', '=', 'orders.cart_id')
+                                ->join('produks', 'produks.id', '=', 'cart_details.produk_id')
+                                ->where('produks.user_id', $itemuser->id)
+                                ->groupBy('no_invoice')
+                                ->paginate(15);
+                    // dd($itemorder);
         }
         
 
         if  ($itemuser->role == 'pembeli') 
         {
             // kalo member maka menampilkan cart punyanya sendiri
-            $itemorder = Order::whereHas('cart', function($q) use ($itemuser) {
-                            $q->where('status_cart', 'checkout');
-                            $q->where('user_id', $itemuser->id);
-                        })
-                        ->orderBy('id')
-                        ->paginate(15);
+            // $itemorder = Order::whereHas('cart', function($q) use ($itemuser) {
+            //                 $q->where('status_cart', 'checkout');
+            //                 $q->where('user_id', $itemuser->id);
+            //             })
+            //             ->orderBy('id')
+            //             ->paginate(15);
+            $itemorder = Order::select('carts.no_invoice as no_invoice', DB::raw('orders.*, orders.id as orderID, carts.status_pembayaran, carts.status_pengiriman') )
+                                ->join('carts', 'carts.id', '=', 'orders.cart_id')
+                                ->where('carts.user_id', $itemuser->id)
+                                ->groupBy('no_invoice')
+                                ->paginate(15);
         }
         // dd($confirms);
         $data = array('title' => 'Data Transaksi',
@@ -92,7 +108,7 @@ class TransaksiController extends Controller
                 $inputanorder['kodepos'] = $itemalamatpengiriman->kodepos;
                 $itemorder = Order::create($inputanorder);//simpan order
                 // update status cart
-                $itemcart->update(['status_cart' => 'checkout']);
+                $itemcart->update(['status_cart' => 'checkout', 'subtotal' => $request->total, 'total' => $request->total]);
                 return redirect()->route('transaksi')->with('success', 'Order berhasil disimpan');
             } else {
                 return back()->with('error', 'Alamat pengiriman belum diisi');

@@ -18,7 +18,6 @@ class CreateConfirmsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('cart_id')->unsigned();
             $table->integer('order_id')->unsigned();
-            $table->string('status');
             $table->text('image');
             $table->timestamps();
 

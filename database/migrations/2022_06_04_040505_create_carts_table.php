@@ -25,7 +25,6 @@ class CreateCartsTable extends Migration
             $table->double('subtotal', 12, 2)->default(0);
             $table->double('ongkir', 12, 2)->default(0);
             $table->double('total', 12, 2)->default(0);
-            $table->string('image')->nullable();
             $table->timestamps();
         });
 

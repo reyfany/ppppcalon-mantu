@@ -14,6 +14,7 @@ class AlamatPengirimanController extends Controller
      */
     public function index(Request $request)
     {
+
         $itemuser = $request->user();
         $itemalamatpengiriman = AlamatPengiriman::where('user_id', $itemuser->id)->paginate(10);
         $data = array('title' => 'Alamat Pengiriman',
@@ -55,8 +56,10 @@ class AlamatPengirimanController extends Controller
         $inputan['status'] = 'utama';
         $itemalamatpengiriman = AlamatPengiriman::create($inputan);
         // set semua status alamat pengiriman bukan utama
-        AlamatPengiriman::where('id', '!=', $itemalamatpengiriman->id)
-                    ->update(['status' => 'tidak']);
+        // AlamatPengiriman::where('id', '!=', $itemalamatpengiriman->id)
+        //             ->update(['status' => 'tidak']);
+
+
         return back()->with('success', 'Alamat pengiriman berhasil disimpan');
     }
 
