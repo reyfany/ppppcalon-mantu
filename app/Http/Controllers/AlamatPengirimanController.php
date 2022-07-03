@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AlamatPengiriman;
 use Illuminate\Http\Request;
 
+
 class AlamatPengirimanController extends Controller
 {
     /**
@@ -19,7 +20,7 @@ class AlamatPengirimanController extends Controller
         $itemalamatpengiriman = AlamatPengiriman::where('user_id', $itemuser->id)->paginate(10);
         $data = array('title' => 'Alamat Pengiriman',
                     'itemalamatpengiriman' => $itemalamatpengiriman);
-        return view('frontend.pages.alamat-pengiriman', $data)->with('no', ($request->input('page', 1) - 1) * 10);
+        return view('frontend.pages.checkout', $data)->with('no', ($request->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -56,10 +57,6 @@ class AlamatPengirimanController extends Controller
         $inputan['status'] = 'utama';
         $itemalamatpengiriman = AlamatPengiriman::create($inputan);
         // set semua status alamat pengiriman bukan utama
-        // AlamatPengiriman::where('id', '!=', $itemalamatpengiriman->id)
-        //             ->update(['status' => 'tidak']);
-
-
         return back()->with('success', 'Alamat pengiriman berhasil disimpan');
     }
 
@@ -94,10 +91,25 @@ class AlamatPengirimanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nama_penerima' => 'required',
+            'no_tlp' => 'required',
+            'alamat' => 'required',
+            'provinsi' => 'required',
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required',
+            'kodepos' => 'required',
+        ]);
         $itemalamatpengiriman = AlamatPengiriman::findOrFail($id);
-        $itemalamatpengiriman->update(['status' => 'utama']);
-        AlamatPengiriman::where('id', '!=', $id)->update(['status' => 'tidak']);
-        return back()->with('success', 'Data berhasil diupdate');
+        $itemuser = $request->user();//ambil data user yang sedang login
+        $inputan = $request->all();//buat variabel dengan nama $inputan
+        $inputan['user_id'] = $itemuser->id;
+        $inputan['status'] = 'utama';
+        // $itemalamatpengiriman->update($inputan);
+        $itemalamatpengiriman = AlamatPengiriman::updated($inputan);
+        // set semua status alamat pengiriman bukan utama
+        return back()->with('success', 'Alamat pengiriman berhasil disimpan');
     }
 
     /**
@@ -106,8 +118,10 @@ class AlamatPengirimanController extends Controller
      * @param  \App\AlamatPengiriman  $alamatPengiriman
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AlamatPengiriman $alamatPengiriman)
+    public function destroy(Request $request, $id)
     {
-        //
+        $itemalamatpengiriman = AlamatPengiriman::findOrFail($id);
+        $itemalamatpengiriman->delete();
+        return back()->with('success', 'Data berhasil dihapus');
     }
 }

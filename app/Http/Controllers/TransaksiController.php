@@ -206,9 +206,7 @@ class TransaksiController extends Controller
      */
     public function destroy($id)
     {
-        $itemcart = Order::findOrFail($id);
-        $itemcart->delete();
-        return back()->with('success','Daata berhasil dihapus');
+       //
     }
 
     public function indexconfirm(Request $request, $id)
@@ -239,7 +237,6 @@ class TransaksiController extends Controller
         $confirm->user_id       = $itemuser->id;
         $confirm->order_id      = $itemcart->id;
         $confirm->image         = $newName;
-        $confirm->status        = 'sudah';
         // dd($confirm);
         $confirm->save();
 

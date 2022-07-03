@@ -124,13 +124,6 @@
                       <a href="{{ route('transaksi.show', $order->orderID) }}"> <button
                           class="icon-book btn btn-success mr-2" type="button" title="detail pemesanan"></button> </a>
                       @if($itemuser->role == 'pembeli')
-                      <form method="POST" action="{{route('transaksi.destroy',[$order->orderID])}}" method="post">
-                        @csrf
-                        @method('delete')
-                        <button class="icofont icofont-ui-delete btn btn-danger mr-2"
-                          onclick="return confirm('Apakah anda yakin akan menghapus?')" title="hapus data"
-                          type="submit"></button>
-                      </form>
                       <a href="{{ route('confirm.index', ['id' => $order->orderID]) }}"><button
                           class="icon-upload btn btn-info mr-2" type="button"
                           title="konfirmasi pembayaran"></button></a>

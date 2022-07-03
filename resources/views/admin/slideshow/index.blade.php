@@ -71,9 +71,6 @@
                                       <td>
                                       {{ $slide->caption_title }}
                                       </td>
-                                      {{-- <td>
-                                      {{ $slide->caption_content }}
-                                      </td> --}}
                                       <td>
                                         <form action="{{ route('slideshow.destroy', $slide->id) }}" method="post" style="display:inline;">
                                           @csrf

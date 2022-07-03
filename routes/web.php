@@ -32,8 +32,8 @@ Route::get('/home', function() {
 Route::get('/', 'HomepageController@home')->name('home');
 Route::get('/produk', 'HomepageController@produk');
 Route::get('/produk/{id}', 'HomepageController@produkdetail')->name('produkdetail');
-// Route::get('/cart/tambah/{id}', 'CartdetailController@tambah');
-// Route::get('/cart/kurangi/{id}', 'CartdetailController@kurangi');
+Route::delete('alamat/{id}', 'AlamatPengirimanController@destroy')->name('itemalamatpengiriman.destroy');
+Route::post('update/{id}', 'AlamatPengirimanController@update')->name('itemalamatpengiriman.update');
 
 Route::group(['middleware'=>['auth','pembeli']],function(){
   Route::resource('cartdetail', 'CartDetailController');
