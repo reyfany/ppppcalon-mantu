@@ -127,7 +127,7 @@ class CartController extends Controller
                         ->where('status_cart', 'cart')
                         ->first();
         $itemalamatpengiriman = AlamatPengiriman::where('user_id', $itemuser->id)
-                                                ->where('status', 'utama')
+                                                // ->where('status', 'utama')
                                                 ->first();
         if ($itemcart) {
             $data = array('title' => 'Checkout',

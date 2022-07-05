@@ -113,12 +113,12 @@
 									{{ $itemalamatpengiriman->no_tlp }}
 								</td>
 								<td class="d-flex justify-content-center">
-									{{-- <button class="btn btn-primary mr-1" type="button" title="ubah data" data-toggle="modal" data-target="#modelubah">Ubah</button> --}}
-									<form method="POST" action="{{route('itemalamatpengiriman.destroy', $itemalamatpengiriman->id)}}" method="post">
+									<button class="btn btn-primary mr-1" type="button" title="ubah data" data-toggle="modal" data-target="#modelupdate">Ubah</button>
+									{{-- <form method="POST" action="{{route('itemalamatpengiriman.destroy', $itemalamatpengiriman->id)}}" method="post">
 										@csrf 
 										@method('delete')
 										<button class="btn btn-danger" onclick="return confirm('Apakah anda yakin akan menghapus?')" title="hapus data" type="submit">Hapus</button>
-									</form>
+									</form> --}}
 								</td>
 							</tr>
 							@endif
@@ -164,7 +164,7 @@
 </section>
 <!-- Button trigger modal -->
 
-<!-- Modal -->
+<!-- store -->
 <div class="modal fade " id="modelId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg " role="document">
 		<div class="modal-content">
@@ -224,5 +224,75 @@
 		</div>
 	</div>
 </div>
+{{-- end store --}}
+
+{{-- update --}}
+<div class="modal fade " id="modelupdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg " role="document">
+		<div class="modal-content">
+			<div class="modal-body pl-4 pr-4">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h6 class="mb-4 modal-title" id="exampleModalLabel">Alamat Pengiriman</h6>
+					
+					{{-- <form action="{{ route('alamatpengiriman.update', $itemalamatpengiriman->id) }}" method="post"  enctype="multipart/form-data">
+						@csrf 
+						@method('PATCH')   
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="nama_penerima">Nama Penerima</label>
+									<input type="text" name="nama_penerima" class="form-control" value={{$itemalamatpengiriman->nama_penerima}} >
+									</div>
+								<div class="form-group">
+									<label for="alamat">Alamat</label>
+									<input type="text" name="alamat" class="form-control" value={{$itemalamatpengiriman->alamat}}>
+								</div>
+								<div class="form-group">
+									<label for="no_tlp">No Tlp</label>
+									<input type="number" min="0" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)"
+									maxLengthCheck="12" maxlength="12" class="form-control " class="form-control" name="no_tlp"
+									value={{$itemalamatpengiriman->no_tlp}}>
+								</div>
+								<div class="form-group">
+									<label for="provinsi">Provinsi</label>
+									<input type="text" name="provinsi" class="form-control" value={{$itemalamatpengiriman->provinsi}}>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="kota">Kota</label>
+									<input type="text" name="kota" class="form-control" value={{$itemalamatpengiriman->kota}}>
+								</div>
+								<div class="form-group">
+									<label for="kecamatan">Kecamatan</label>
+									<input type="text" name="kecamatan" class="form-control" value={{$itemalamatpengiriman->kecamatan}}>
+								</div>
+								<div class="form-group">
+									<label for="kelurahan">Kelurahan</label>
+									<input type="text" name="kelurahan" class="form-control" value={{$itemalamatpengiriman->kelurahan}}>
+								</div>
+								<div class="form-group">
+									<label for="kodepos">Kodepos</label>
+									<input type="text" name="kodepos" class="form-control" value={{$itemalamatpengiriman->kodepos}}>
+								</div>
+								<div class="form-group pull-right">
+									<button type="submit" class="btn btn-primary">Simpan</button>
+								</div>
+							</div>
+							</div>
+					</form> --}}
+			</div>
+		</div>
+	</div>
+</div>
+{{-- update --}}
+<script>
+	function maxLengthCheck(object) {
+	   if (object.value.length > object.maxLength)
+		   object.value = object.value.slice(0, object.maxLength)
+   };
+</script>
 
 @endsection

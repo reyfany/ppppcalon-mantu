@@ -93,7 +93,7 @@ class TransaksiController extends Controller
                         ->first();
         if ($itemcart) {
             $itemalamatpengiriman = AlamatPengiriman::where('user_id', $itemuser->id)
-                                                    ->where('status', 'utama')
+                                                    // ->where('status', 'utama')
                                                     ->first();
             if ($itemalamatpengiriman) {
                 // buat variabel inputan order

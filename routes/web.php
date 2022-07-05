@@ -33,7 +33,7 @@ Route::get('/', 'HomepageController@home')->name('home');
 Route::get('/produk', 'HomepageController@produk');
 Route::get('/produk/{id}', 'HomepageController@produkdetail')->name('produkdetail');
 Route::delete('alamat/{id}', 'AlamatPengirimanController@destroy')->name('itemalamatpengiriman.destroy');
-Route::post('update/{id}', 'AlamatPengirimanController@update')->name('itemalamatpengiriman.update');
+Route::patch('update/{id}', 'AlamatPengirimanController@update')->name('alamatpengiriman.update');
 
 Route::group(['middleware'=>['auth','pembeli']],function(){
   Route::resource('cartdetail', 'CartDetailController');
@@ -41,7 +41,6 @@ Route::group(['middleware'=>['auth','pembeli']],function(){
   Route::get('checkout', 'CartController@checkout')->name('checkout');
   Route::get('cart', 'CartController@index')->name('cart');
   Route::patch('kosongkan/{id}', 'CartController@kosongkan');
-  // Route::post('/cart/update','CartController@update')->name('cart.update');
 });
 // end frond end
 

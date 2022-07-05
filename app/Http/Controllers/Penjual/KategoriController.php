@@ -43,7 +43,7 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'kode_kategori' => 'required',
+            // 'kode_kategori' => 'required',
             'nama_kategori'=>'required|string|max:255',
             'slug_kategori' => 'required',
             'deskripsi'=>'required|string|max:255',

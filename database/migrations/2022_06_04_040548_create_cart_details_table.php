@@ -19,7 +19,6 @@ class CreateCartDetailsTable extends Migration
             $table->integer('cart_id')->unsigned();
             $table->double('qty', 12, 2)->default(0);
             $table->double('harga', 12, 2)->default(0);
-            // $table->double('diskon', 12, 2)->default(0);
             $table->double('subtotal', 12, 2)->default(0);
             $table->timestamps();  
         });

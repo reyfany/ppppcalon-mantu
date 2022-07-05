@@ -54,7 +54,7 @@ class AlamatPengirimanController extends Controller
         $itemuser = $request->user();//ambil data user yang sedang login
         $inputan = $request->all();//buat variabel dengan nama $inputan
         $inputan['user_id'] = $itemuser->id;
-        $inputan['status'] = 'utama';
+        // $inputan['status'] = 'utama';
         $itemalamatpengiriman = AlamatPengiriman::create($inputan);
         // set semua status alamat pengiriman bukan utama
         return back()->with('success', 'Alamat pengiriman berhasil disimpan');
@@ -89,7 +89,7 @@ class AlamatPengirimanController extends Controller
      * @param  \App\AlamatPengiriman  $alamatPengiriman
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         $this->validate($request, [
             'nama_penerima' => 'required',
@@ -105,10 +105,9 @@ class AlamatPengirimanController extends Controller
         $itemuser = $request->user();//ambil data user yang sedang login
         $inputan = $request->all();//buat variabel dengan nama $inputan
         $inputan['user_id'] = $itemuser->id;
-        $inputan['status'] = 'utama';
+        // $inputan['status'] = 'utama';
         // $itemalamatpengiriman->update($inputan);
-        $itemalamatpengiriman = AlamatPengiriman::updated($inputan);
-        // set semua status alamat pengiriman bukan utama
+        $itemalamatpengiriman->update($inputan);
         return back()->with('success', 'Alamat pengiriman berhasil disimpan');
     }
 

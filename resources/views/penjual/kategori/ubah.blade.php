@@ -53,12 +53,6 @@
                                 <div class="row ">
                                     <div class="col-md-12 ">
                                         <div class="form-group ">
-                                            <label class="form-label "><b>Kode Kategori </b></label>
-                                            <input type="text " class="form-control " name="kode_kategori" placeholder="Kode kategori * " id="text-input " value="{{ $itemkategori->kode_kategori }}" required=" " />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 ">
-                                        <div class="form-group ">
                                             <label class="form-label "><b>Nama Kategori </b></label>
                                             <input type="text " class="form-control "  name="nama_kategori" placeholder="Nama Kategori * " id="text-input " value="{{ $itemkategori->nama_kategori }}" required=" " />
                                         </div>

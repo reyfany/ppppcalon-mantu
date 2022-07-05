@@ -19,7 +19,7 @@ class Order extends Model
         'kecamatan',
         'kelurahan',
         'kodepos',
-        'image'
+        // 'image'
     ];
 
     public static function countActiveOrder(){

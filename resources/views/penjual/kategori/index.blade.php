@@ -52,7 +52,6 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Kode Kategori</th>
                                             <th>Nama Kategori</th>
                                             <th>Jumlah Produk</th>
                                             <th>Deskripsi Produk</th>
@@ -65,9 +64,6 @@
                                         <tr>
                                             <td>
                                                 {{ ++$no }}
-                                            </td>
-                                            <td>
-                                                {{ $kategori->kode_kategori }}
                                             </td>
                                             <td>
                                                 {{ $kategori->nama_kategori}}

@@ -50,12 +50,6 @@
                     <form action="{{ route('kategori.store') }}" method="POST" enctype="multipartform-data">
                     @csrf
                     <div class="row ">
-                        <div class="col-md-12 ">
-                            <div class="form-group ">
-                                <label class="form-label "><b>Kode Kategori</b></label>
-                                <input type="text " class="form-control " placeholder="Kode Kategori * " name="kode_kategori" value="{{ old('kode_kategori') }}" required=" " />
-                            </div>
-                        </div>
                             <div class="col-md-12 ">
                                 <div class="form-group ">
                                     <label class="form-label "><b>Nama Kategori</b></label>
