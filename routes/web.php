@@ -32,7 +32,7 @@ Route::get('/home', function() {
 Route::get('/', 'HomepageController@home')->name('home');
 Route::get('/produk', 'HomepageController@produk');
 Route::get('/produk/{id}', 'HomepageController@produkdetail')->name('produkdetail');
-Route::delete('alamat/{id}', 'AlamatPengirimanController@destroy')->name('itemalamatpengiriman.destroy');
+Route::delete('alamat/{id}', 'AlamatPengirimanController@destroy')->name('alamatpengiriman.destroy');
 Route::patch('update/{id}', 'AlamatPengirimanController@update')->name('alamatpengiriman.update');
 
 Route::group(['middleware'=>['auth','pembeli']],function(){

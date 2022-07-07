@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\AlamatPengiriman;
-use App\CartDetail;
 use App\Order;
 use App\confirm;
 use Illuminate\Support\Facades\DB;
