@@ -65,6 +65,8 @@
 							</td>
 							<td>
 								{{ $detail->produk->nama_produk }}
+								<br>
+								{{ $detail->produk->kode_produk }}
 							</td>
 							<td>
 								Rp. {{ number_format($detail->harga, 2) }}
