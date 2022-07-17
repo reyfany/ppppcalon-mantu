@@ -23,7 +23,33 @@ class TransaksiController extends Controller
         $confirms = confirm::get();
         if ($itemuser->role == 'penjual') 
         {
-            // $itemorder = Order::whereHas('cart', function($q) {
+            $itemorder = Order::select('carts.no_invoice as no_invoice', 
+            DB::raw('orders.*, orders.id as orderID, carts.status_pembayaran, carts.status_pengiriman') )
+            ->join('carts', 'carts.id', '=', 'orders.cart_id')
+            ->join('cart_details', 'cart_details.cart_id', '=', 'orders.cart_id')
+            ->join('produks', 'produks.id', '=', 'cart_details.produk_id')
+            ->where('produks.user_id', $itemuser->id)
+            ->groupBy('no_invoice')
+            ->paginate(15);
+        }
+        if  ($itemuser->role == 'pembeli') 
+        {
+            $itemorder = Order::select('carts.no_invoice as no_invoice', 
+            DB::raw('orders.*, orders.id as orderID, carts.status_pembayaran, carts.status_pengiriman') )
+                                ->join('carts', 'carts.id', '=', 'orders.cart_id')
+                                ->where('carts.user_id', $itemuser->id)
+                                ->groupBy('no_invoice')
+                                ->paginate(15);
+        }
+        $data = array('title' => 'Data Transaksi',
+                    'itemorder' => $itemorder,
+                    'itemuser' => $itemuser,
+                    'confirms' => $confirms
+                );
+        return view('transaksi.index', $data);
+        
+        // penjual
+          // $itemorder = Order::whereHas('cart', function($q) {
             //     $q->where('status_cart', 'checkout');
             //     $q->where('user_id', 'checkout');
             // })
@@ -31,41 +57,16 @@ class TransaksiController extends Controller
             //     ->orderBy('id')
             //     ->paginate(15);
 
-                $itemorder = Order::select('carts.no_invoice as no_invoice', DB::raw('orders.*, orders.id as orderID, carts.status_pembayaran, carts.status_pengiriman') )
-                                ->join('carts', 'carts.id', '=', 'orders.cart_id')
-                                ->join('cart_details', 'cart_details.cart_id', '=', 'orders.cart_id')
-                                ->join('produks', 'produks.id', '=', 'cart_details.produk_id')
-                                ->where('produks.user_id', $itemuser->id)
-                                ->groupBy('no_invoice')
-                                ->paginate(15);
                     // dd($itemorder);
-        }
-        
 
-        if  ($itemuser->role == 'pembeli') 
-        {
-            // kalo member maka menampilkan cart punyanya sendiri
+        // pembeli
+           // kalo pembeli maka menampilkan cart punyanya sendiri
             // $itemorder = Order::whereHas('cart', function($q) use ($itemuser) {
             //                 $q->where('status_cart', 'checkout');
             //                 $q->where('user_id', $itemuser->id);
             //             })
             //             ->orderBy('id')
             //             ->paginate(15);
-            $itemorder = Order::select('carts.no_invoice as no_invoice', DB::raw('orders.*, orders.id as orderID, carts.status_pembayaran, carts.status_pengiriman') )
-                                ->join('carts', 'carts.id', '=', 'orders.cart_id')
-                                ->where('carts.user_id', $itemuser->id)
-                                ->groupBy('no_invoice')
-                                ->paginate(15);
-        }
-        // dd($confirms);
-        $data = array('title' => 'Data Transaksi',
-                    'itemorder' => $itemorder,
-                    'itemuser' => $itemuser,
-                    'confirms' => $confirms
-                );
-                // dd($data);
-                // dd($data);
-        return view('transaksi.index', $data);
     }
 
     /**

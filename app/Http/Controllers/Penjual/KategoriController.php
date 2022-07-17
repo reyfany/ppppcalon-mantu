@@ -19,9 +19,9 @@ class KategoriController extends Controller
         $itemuser = $request->user();
         $itemkategori = Kategori::where('user_id', $itemuser->id)
         ->where('status', 'active')
-        ->orderBy('created_at')
         ->paginate(5);
-        return view('penjual.kategori.index',compact('itemkategori'))->with('no',  ($request->input('page', 1) - 1) * 5);
+        return view('penjual.kategori.index',compact('itemkategori'))
+        ->with('no',  ($request->input('page', 1) - 1) * 5);
     }
 
     /**

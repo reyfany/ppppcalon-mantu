@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $users=User::orderBy('id','ASC')->paginate(10);
-        return view('admin.users.index')->with('users',$users);
+        return view('admin.users.index',compact('users'));
     }
 
     /**
@@ -120,16 +120,6 @@ class UserController extends Controller
         $file = $request->file('photo');
         // nama file
         $nama_file = time() . "." . $file->getClientOriginalExtension();
-        // $file = $request->file('photo');
-
-        // nama file
-        // if ($file == "") {
-        //     $nama_file = $user->photo;
-        // } else {
-        //     $user = User::where('id', $id)->first();
-        //     File::delete('assets/images/' . $user->photo);
-        //     $nama_file = time() . "." . $file->getClientOriginalExtension();
-        // }
         $user->name = $request->get('name');
         $user->photo = $nama_file;
         $user->email = $request->get('email');
@@ -137,17 +127,7 @@ class UserController extends Controller
         $user->role = $request->get('role');
         $user->phone = $request->get('phone');
         $user->alamat = $request->get('alamat');
-
-        // upload file
-        // $tujuan_upload = 'aassets/images/';
-        // if ($file == "") {
-        // } else {
-        //     $file->move($tujuan_upload, $nama_file);
-        // }
-
-        // isi dengan nama folder tempat kemana file diupload
         $tujuan_upload = 'assets/images/';
-
         // upload file
         $file->move($tujuan_upload, $nama_file);
 

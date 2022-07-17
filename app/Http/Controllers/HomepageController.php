@@ -22,18 +22,18 @@ class HomepageController extends Controller
             return view('frontend.index', $data)->with('no', ($request->input('page') - 1) * 2);
         }
 
-    public function produk(Request $request) {
-        $itemproduk = Produk::orderBy('nama_produk', 'desc')
-                            ->where('status', 'active')
-                            ->paginate(5);
-        $itemkategori = Kategori::orderBy('nama_kategori', 'asc')
-                                ->where('status', 'active')
-                                ->get();
-        $data = array('title' => 'Produk',
-                    'itemproduk' => $itemproduk,
-                    'itemkategori' => $itemkategori);
-        return view('frontend.index', $data)->with('no', ($request->input('page') - 1) * 5);
-    }
+    // public function produk(Request $request) {
+    //     $itemproduk = Produk::orderBy('nama_produk', 'desc')
+    //                         ->where('status', 'active')
+    //                         ->paginate(5);
+    //     $itemkategori = Kategori::orderBy('nama_kategori', 'asc')
+    //                             ->where('status', 'active')
+    //                             ->get();
+    //     $data = array('title' => 'Produk',
+    //                 'itemproduk' => $itemproduk,
+    //                 'itemkategori' => $itemkategori);
+    //     return view('frontend.index', $data)->with('no', ($request->input('page') - 1) * 5);
+    // }
 
     public function produkdetail($id) {
         $itemkategori = Kategori::where('nama_kategori','desc');

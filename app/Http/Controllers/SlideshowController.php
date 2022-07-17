@@ -14,10 +14,8 @@ class SlideshowController extends Controller
      */
     public function index(Request $request)
     {
-        $itemslideshow = Slideshow::paginate(10);
-        $data = array('title' => 'Dashboard Slideshow',
-                    'itemslideshow' => $itemslideshow);
-        return view('admin.slideshow.index', $data)->with('no', ($request->input('page', 1) - 1) * 10);
+        $itemslideshow = Slideshow::paginate(5);
+        return view('admin.slideshow.index', compact('itemslideshow'))->with('no', ($request->input('page', 1) - 1) * 5);
     }
 
     /**

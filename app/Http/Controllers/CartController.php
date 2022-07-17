@@ -22,8 +22,7 @@ class CartController extends Controller
                         ->where('status_cart', 'cart')
                         ->first();
         if ($itemcart) {
-            $data = array('title' => 'Shopping Cart',
-                        'itemcart' => $itemcart);
+            $data = array('itemcart' => $itemcart);
             return view('frontend.pages.cartdetail', $data)->with('no', 1);            
         } else {
             return abort('404');

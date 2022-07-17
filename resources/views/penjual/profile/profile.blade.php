@@ -63,6 +63,12 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group ">
+                                                        <label class="form-label">Pilih Foto</label>
+                                                        <input type="file" class="form-control" style="height: 44px; cursor:pointer;"  name="photo" value="{{$profile->photo}}" readony>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class="form-label">Nama</label>

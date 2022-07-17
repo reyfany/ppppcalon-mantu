@@ -91,30 +91,25 @@ class AlamatPengirimanController extends Controller
      */
     public function update(Request $request,$id)
     {
-        // $itemalamatpengiriman = AlamatPengiriman::findOrFail($id);
-        // $itemalamatpengiriman->update(['status' => 'utama']);
-        // AlamatPengiriman::where('id', '!=', $id)->update(['status' => 'tidak']);
-        // return back()->with('success', 'Data berhasil diupdate');
-
-        // $this->validate($request, [
-        //     'nama_penerima' => 'required',
-        //     'no_tlp' => 'required',
-        //     'alamat' => 'required',
-        //     'provinsi' => 'required',
-        //     'kota' => 'required',
-        //     'kecamatan' => 'required',
-        //     'kelurahan' => 'required',
-        //     'kodepos' => 'required',
-        // ]);
+        $this->validate($request, [
+            'nama_penerima' => 'required',
+            'no_tlp' => 'required',
+            'alamat' => 'required',
+            'provinsi' => 'required',
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required',
+            'kodepos' => 'required',
+        ]);
         
-        // $itemalamatpengiriman = AlamatPengiriman::findOrFail($id);
-        // $itemuser = $request->user();//ambil data user yang sedang login
-        // $inputan = $request->all();//buat variabel dengan nama $inputan
-        // $inputan['user_id'] = $itemuser->id;
-        // // $inputan['status'] = 'utama';
-        // // $itemalamatpengiriman->update($inputan);
+        $itemalamatpengiriman = AlamatPengiriman::findOrFail($id);
+        $itemuser = $request->user();//ambil data user yang sedang login
+        $inputan = $request->all();//buat variabel dengan nama $inputan
+        $inputan['user_id'] = $itemuser->id;
+        // $inputan['status'] = 'utama';
         // $itemalamatpengiriman->update($inputan);
-        // return back()->with('success', 'Alamat pengiriman berhasil disimpan');
+        $itemalamatpengiriman->update($inputan);
+        return back()->with('success', 'Alamat pengiriman berhasil disimpan');
     }
 
     /**

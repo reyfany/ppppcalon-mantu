@@ -121,18 +121,19 @@
 										@method('delete')
 										<button class="btn btn-danger" onclick="return confirm('Apakah anda yakin akan menghapus?')" title="hapus data" type="submit">Hapus</button>
 									</form>
-									{{-- <button class="btn btn-danger ml-1" data-toggle="modal" data-target="#modelupdate" > ubah</button> --}}
+									<button class="btn btn-danger ml-1" data-toggle="modal" data-target="#modelupdate" > ubah</button>
 								</td>
 							</tr>
 							@endif
 						</tbody>
 					</table>
-					
+					<?php if($itemalamatpengiriman == null){  ?>
 					<div class="card-footer">
 						<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
 							Tambah Alamat
 						</button>
 					</div>
+					<?php } ?>
 				</div>
 			</div>
 			<div class="col-lg-4 col-12">
@@ -229,6 +230,8 @@
 </div>
 {{-- end store --}}
 
+
+<?php if($itemalamatpengiriman != null){ ?>
 {{-- update --}}
 <div class="modal fade " id="modelupdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg " role="document">
@@ -240,19 +243,58 @@
 				<h6 class="mb-4 modal-title" id="exampleModalLabel">Alamat Pengiriman</h6>
 					
 				
-					{{-- <form action="{{ route('alamatpengiriman.update',$itemalamatpengiriman->id) }}" method="post">
+					<form action="{{ route('alamatpengiriman.update',$itemalamatpengiriman->id) }}" method="post">
 						@method('patch')
 						@csrf()
-						@if($itemalamatpengiriman->status == 'utama')
-						<button type="submit" class="btn btn-primary btn-sm" disabled>Set Utama</button>
-						@else
-						<button type="submit" class="btn btn-primary btn-sm">Set Utama</button>
-						@endif
-					</form> --}}
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="nama_penerima">Nama Penerima</label>
+									<input type="text" name="nama_penerima" class="form-control" value="{{$itemalamatpengiriman->nama_penerima}}">
+								</div>
+								<div class="form-group">
+									<label for="alamat">Alamat</label>
+									<input type="text" name="alamat" class="form-control" value="{{$itemalamatpengiriman->alamat}}">
+								</div>
+								<div class="form-group">
+									<label for="no_tlp">No Tlp</label>
+									<input type="number" min="0" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)"
+									maxLengthCheck="12" maxlength="12" class="form-control " class="form-control" name="no_tlp"
+									value="{{$itemalamatpengiriman->no_tlp}}">
+								</div>
+								<div class="form-group">
+									<label for="provinsi">Provinsi</label>
+									<input type="text" name="provinsi" class="form-control" value="{{$itemalamatpengiriman->provinsi}}">
+								</div>
+							</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="kota">Kota</label>
+										<input type="text" name="kota" class="form-control" value="{{$itemalamatpengiriman->kota}}">
+									</div>
+									<div class="form-group">
+										<label for="kecamatan">Kecamatan</label>
+										<input type="text" name="kecamatan" class="form-control" value="{{$itemalamatpengiriman->kecamatan}}">
+									</div>
+									<div class="form-group">
+										<label for="kelurahan">Kelurahan</label>
+										<input type="text" name="kelurahan" class="form-control" value="{{$itemalamatpengiriman->kelurahan}}">
+									</div>
+									<div class="form-group">
+										<label for="kodepos">Kodepos</label>
+										<input type="text" name="kodepos" class="form-control" value="{{$itemalamatpengiriman->kodepos}}">
+									</div>
+									<div class="form-group pull-right">
+										<button type="submit" class="btn btn-primary">Simpan</button>
+									</div>
+								</div>
+							</div>
+					</form>
 			</div>
 		</div>
 	</div>
 </div>
+<?php } ?>
 {{-- update --}}
 <script>
 	function maxLengthCheck(object) {
