@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>MARKETPLACE || LOGIN</title>
+  <title>MARKETPLACE || MASUK</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{asset('assets/vendors/ti-icons/css/themify-icons.css')}}">
   <link rel="stylesheet" href="{{asset('assets/vendors/base/vendor.bundle.base.css')}}">
@@ -34,7 +34,7 @@
         <div class="row flex-grow">
           <div class="col-lg-6 d-flex align-items-center justify-content-center">
             <div class="auth-form-transparent text-left p-3">
-              <h3 class="text-center" style="color: #248afd">LOGIN</h3>
+              <h3 class="text-center" style="color: #248afd">MASUK</h3>
                            {{-- <form class="pt-3"> --}}
                 <form class="pt-3" method="POST" action="{{ route('login') }}">
                   @csrf
@@ -81,7 +81,7 @@
                     <input class="form-control @error('email') is-invalid @enderror" id="email" type="email"  name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                     @error('email')
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
+                        <strong>Data yang anda masukkan salah</strong>
                     </span>
                 @enderror
                   </div>
@@ -89,7 +89,7 @@
             <div class="col-sm-12">
               <div class="form-group">
                   <label class="form-label">Password</label>
-                  <input class="form-control @error('password') is-invalid @enderror" id="password" type="password" name="password" required autocomplete="current-password">
+                  <input class="form-control @error('password') is-invalid @enderror" id="password" type="password" name="password" value="{{ old('password') }}" required autocomplete="current-password" autofocus>
                   <i class="toggle-password fa fa-fw fa-eye-slash"></i>
                   @error('password')
                   <span class="invalid-feedback" role="alert">
@@ -103,21 +103,20 @@
                   <div class="form-check">
                     <label class="form-check-label text-muted">
                       <input type="checkbox" class="form-check-input">
-                      {{ __('Remember Me') }}
+                      {{ __('Ingat saya') }}
                     </label>
                   </div>
-                  @if (Route::has('password.request'))
+                  {{-- @if (Route::has('password.request'))
                   <a class="btn btn-link" href="{{ route('password.request') }}">
                       {{ __('Forgot Your Password?') }}
                   </a>
-              @endif
-                  {{-- <a href="#" class="auth-link text-black">Forgot password?</a> --}}
+              @endif --}}
                 </div>
                 <button type="submit" class="btn btn-primary">
-                  {{ __('Login') }}
+                  {{ __('Masuk') }}
               </button>
                 <div class="text-center mt-4 font-weight-light">
-                  Don't have an account? <a href="{{ route('register') }}" class="text-primary">Create</a>
+                  Belum punya akun? <a href="{{ route('register') }}" class="text-primary">Daftar</a>
                 </div>
               </form>
             </div>

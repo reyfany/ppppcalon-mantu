@@ -89,7 +89,7 @@
 			<div class="col-lg-8 col-12">
 				<div class="checkout-form">
 					<h2>Alamat Pengiriman</h2>
-					<p>Alamat Harus lengkap | Cukup isi satu kali</p>
+					<p>Alamat Harus lengkap</p>
 					<!-- alamat -->
 					<table class="table shopping-cart  table-borderless mt-4">
 						<thead>

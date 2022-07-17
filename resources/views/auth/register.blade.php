@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>MARKETPLACE || REGISTER</title>
+  <title>MARKETPLACE || DAFTAR</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{asset('assets/vendors/ti-icons/css/themify-icons.css')}}">
   <link rel="stylesheet" href="{{asset('assets/vendors/base/vendor.bundle.base.css')}}">
@@ -25,7 +25,7 @@
         <div class="row flex-grow">
           <div class="col-lg-6 d-flex align-items-center justify-content-center">
             <div class="auth-form-transparent text-left p-3">
-                        <h3 class="text-center" style="color: #248afd">REGISTER</h3>
+                        <h3 class="text-center" style="color: #248afd">DAFTAR</h3>
                      {{-- <form class="pt-3"> --}}
                 <form class="pt-3" method="POST" action="{{ route('register') }}">
                     @csrf
@@ -104,7 +104,7 @@
                   <div class="form-check">
                     <label class="form-check-label text-muted">
                       <input type="checkbox" class="form-check-input">
-                      I agree to all Terms & Conditions
+                      Saya setuju dengan semua syarat dan ketentuan
                     </label>
                   </div>
                 </div>
@@ -112,10 +112,10 @@
                   <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="{{ route('login') }}">   {{ __('Register') }}</a>
                 </div> --}}
                 <button type="submit" class="btn btn-primary">
-                  {{ __('Register') }}
+                  {{ __('Daftar') }}
               </button>
                 <div class="text-center mt-4 font-weight-light">
-                  Already have an account? <a href="{{ route('login') }}" class="text-primary">Login</a>
+                  Sudah memiliki akun? <a href="{{ route('login') }}" class="text-primary">Masuk</a>
                 </div>
               </form>
             </div>

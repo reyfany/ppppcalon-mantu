@@ -15,6 +15,22 @@
             @include('pembeli.layout.sidebar')
             <!-- Page Sidebar Ends-->
             <div class="page-body">
+                @can('isAdmin')
+                <div class="alert alert-success alert-block">
+					<button type="button" class=" close-circle " data-dismiss="alert">×</button> 
+					<p>Selamat Datang {{auth()->user()->name}}</p>
+				</div>
+                @elsecan('isPenjual')
+                <div class="alert alert-success alert-block">
+					<button type="button" class="close" data-dismiss="alert">×</button> 
+					<p>Selamat Datang {{auth()->user()->name}}</p>
+				</div>
+                @elsecan('isPembeli')
+                <div class="alert alert-success alert-block">
+					<button type="button" sds class="close" data-dismiss="alert">×</button> 
+					<p>Selamat Datang {{auth()->user()->name}}</p>
+				</div>
+                @endcan
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="row">
