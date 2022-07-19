@@ -32,7 +32,7 @@ class CreateProduksTable extends Migration
 
         Schema::table('produks',function(Blueprint $table){
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('kategori_id')->references('id')->on('kategoris');
+            $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
         });
     }
 

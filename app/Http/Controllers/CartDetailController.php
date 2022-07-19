@@ -17,7 +17,7 @@ class CartDetailController extends Controller
     public function index()
     {
         //
-        return abort('404');
+        return abort('403', 'Keranjang pembelian anda masih kosong');
         // return view('frontend.pages.cartdetail');
     }
 

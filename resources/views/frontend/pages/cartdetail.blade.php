@@ -145,11 +145,11 @@
 									{{-- <a href="{{ route('checkout') }}" class="btn" id="button">Checkout</a> --}}
 								</div>
 								<div class="button5">
-									<form action="{{ url('kosongkan').'/'.$itemcart->id }}" method="post">
-										@method('patch')
-										@csrf()
-										<button type="submit" class="btn btn-danger btn-block" id="disable-button">Kosongkan</button>
-									</form>
+									
+									<a href="/">
+										<button type="submit" class="btn btn-danger btn-block" id="disable-button">Continue Shopping</button>
+									</a>
+									
 								</div>
 							</div>
 						</div>

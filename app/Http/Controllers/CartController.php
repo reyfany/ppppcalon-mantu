@@ -25,7 +25,7 @@ class CartController extends Controller
             $data = array('itemcart' => $itemcart);
             return view('frontend.pages.cartdetail', $data)->with('no', 1);            
         } else {
-            return abort('404');
+            return abort('403', 'Keranjang pembelian anda masih kosong');
         }
     }
 
