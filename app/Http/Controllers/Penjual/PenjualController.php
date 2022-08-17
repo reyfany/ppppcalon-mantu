@@ -25,12 +25,21 @@ class PenjualController extends Controller
     }
 
     public function update(Request $request,$id){
-        // return $request->all();
+        $request->validate([
+            'name'=>'string|required|max:30',
+            'email'=>'string',
+            'phone'=>'string',
+            'alamat'=>'string',
+        ]);
         $user=User::findOrFail($id);
         $file = $request->file('photo');
         // nama file
         $nama_file = time() . "." . $file->getClientOriginalExtension();
         $user->photo = $nama_file;
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->phone = $request->get('phone');
+        $user->alamat = $request->get('alamat');
         $tujuan_upload = 'assets/images/';
         // upload file
         $file->move($tujuan_upload, $nama_file);

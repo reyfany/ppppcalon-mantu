@@ -160,7 +160,7 @@
 		</div>
 	</div>
 </div>
-
+{{-- @include('sweetalert::alert') --}}
 <script src="{{asset('frontend/js/jquery.min.js')}}"></script>
 
 <script type="text/javascript">

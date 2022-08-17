@@ -38,16 +38,16 @@
                                 </button>
                             </a>                                           
                             <div class="table-responsive">
-                                        @if ($message = Session::get('error'))
-                                        <div class="alert alert-warning">
-                                            <p>{{ $message }}</p>
-                                        </div>
-                                    @endif
-                                    @if ($message = Session::get('success'))
-                                        <div class="alert alert-success">
-                                            <p>{{ $message }}</p>
-                                        </div>
-                                    @endif
+                                @if ($message = Session::get('error'))
+                                <div class="alert alert-warning">
+                                    <p>{{ $message }}</p>
+                                </div>
+                                @endif
+                                @if ($message = Session::get('success'))
+                                    <div class="alert alert-success">
+                                        <p>{{ $message }}</p>
+                                    </div>
+                                @endif 
                                 <table class="table-bordered table-striped text-center" id="test">
                                     <thead>
                                         <tr>
@@ -103,8 +103,7 @@
             @include('penjual.layout.bottom')
         </div>
     </div>
-    @include('sweetalert::alert')
-   
+
     <script>
         $(document).ready(function() {
             $('#test').DataTable({

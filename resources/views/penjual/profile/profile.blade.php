@@ -96,7 +96,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label class="form-label">No Telepon</label>
-                                                        <input type="number" min="0" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxLengthCheck="12" maxlength = "12" class="form-control " placeholder="Nomor Telepon" name="phone" value="{{$profile->phone}}" required=" " />
+                                                        <input type="number" min="0" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" maxLengthCheck="12" maxlength = "12" class="form-control " placeholder="Nomor Telepon" name="phone" value="{{$profile->phone}}"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">

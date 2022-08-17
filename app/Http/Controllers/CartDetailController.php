@@ -67,9 +67,7 @@ class CartDetailController extends Controller
                                 ->first();
         $qty = 1;// diisi 1, karena kita set ordernya 1
         $harga = $itemproduk->harga;//ambil harga produk
-        // $diskon = $itemproduk->promo != null ? $itemproduk->promo->diskon_nominal: 0;
         $subtotal = $qty * $harga;
-        // diskon diambil kalo produk itu ada promo, cek materi sebelumnya
         if ($cekdetail) {
             // update detail di table cart_detail
             $cekdetail->updatedetail($cekdetail, $qty, $harga);

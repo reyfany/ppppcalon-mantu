@@ -36,18 +36,18 @@
                                 <button class="text-white btn btn-success pull-right mb-2" type="button" title="tambah produk"><i class="fa fa-plus">
                                     </i>&emsp; Tambah Produk
                                 </button>  
-                            </a>                                        
+                            </a>                          
+                            @if ($message = Session::get('error'))
+                            <div class="alert alert-warning">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif               
                             <div class="table-responsive">
-                                @if ($message = Session::get('error'))
-                                    <div class="alert alert-warning">
-                                        <p>{{ $message }}</p>
-                                    </div>
-                                @endif
-                                @if ($message = Session::get('success'))
-                                    <div class="alert alert-success">
-                                        <p>{{ $message }}</p>
-                                    </div>
-                                @endif 
                                 <table class="table table-bordered table-striped text-center" id="test">
                                     <thead>
                                         <tr>
@@ -126,7 +126,6 @@
             @include('penjual.layout.bottom')
         </div>
     </div>
-        @include('sweetalert::alert')
     <script>
         $(document).ready(function() {
             $('#test').DataTable({

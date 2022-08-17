@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\AlamatPengiriman;
 use App\CartDetail;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Produk;
 use Illuminate\Http\Request;
 
@@ -23,9 +24,11 @@ class CartController extends Controller
                         ->first();
         if ($itemcart) {
             $data = array('itemcart' => $itemcart);
-            return view('frontend.pages.cartdetail', $data)->with('no', 1);            
-        } else {
-            return abort('403', 'Keranjang pembelian anda masih kosong');
+            return view('frontend.pages.cartdetail', $data)->with('no', 1);    
+                    
+        } if($itemcart == null) {   
+            Alert::success('Alert', 'Keranjang pembelian anda masih kosong :)');
+            return abort('403', 'Keranjang pembelian anda masih kosong :)');
         }
     }
 
