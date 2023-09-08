@@ -60,5 +60,11 @@ class UsersTableSeeder extends Seeder
             'status' => 'active',
             'user_id' => '2',
         ]);
+
+        DB::table('slideshows')->insert([
+            'id' => '1',
+            'foto' => '1694143793.jpg',
+            'user_id' => '1',
+        ]);
     }
 }
